@@ -208,12 +208,22 @@
         }
 
         .toggle-password {
-            padding: 20px;
+            padding: 4px;
             background: none;
             border: none;
             cursor: pointer;
-            color: #9ca3af;
-            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-password svg {
+            width: 20px;
+            height: 20px;
+            color: #6b7280;
+            display: block;
         }
 
         .toggle-password:hover {
