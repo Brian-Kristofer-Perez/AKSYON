@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Status_Update extends Model
+class StatusUpdate extends Model
 {
     protected $fillable = [
         'id',
