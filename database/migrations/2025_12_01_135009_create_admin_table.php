@@ -16,8 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('email');
             $table->string('password');
-            $table->string('profile_image');
-            $table->string('profile_image_mime');
+            $table->string('profile_image')->nullable();
+            $table->string('profile_image_mime')->nullable();
             $table->string('specimen_signature');
             $table->string('card_id');
 

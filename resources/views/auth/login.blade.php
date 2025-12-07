@@ -385,7 +385,7 @@
                     <h2>Hello, User!</h2>
                     <p>Don't have an account?<br>Enter your personal details<br>and let's get some action done!</p>
                 </div>
-                <form method="POST" action="{{ route('user.login') }}" class="auth-form">
+                <form method="POST" action="{{ route('user.auth.login') }}" class="auth-form">
                     @csrf
                     <div class="form-group">
                         <div class="input-wrapper @error('email') is-invalid @enderror">

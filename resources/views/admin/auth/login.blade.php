@@ -351,7 +351,7 @@
                     <p>Sign in to access the admin dashboard</p>
                 </div>
 
-                <form class="auth-form" method="POST" action="{{ route('admin.login') }}">
+                <form class="auth-form" method="POST" action="{{ route('admin.auth.login') }}">
                     @csrf
                     <div class="form-group">
                         <div class="input-wrapper">

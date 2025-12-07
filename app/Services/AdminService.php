@@ -19,6 +19,8 @@
             Auth::guard('admin')->login($admin);
 
             return $admin;
+
+            //TODO: add validation for existing email
         }
 
         public function login(string $email, string $password)
