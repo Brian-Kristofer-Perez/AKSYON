@@ -442,7 +442,19 @@
                         </div>
                     @endif
                 </form>
-                <div style="text-align: center; margin-top: 30px;">
+                <div style="text-align: center; margin: 30px 0;">
+                    <div style="height: 1px; background-color: #e5e7eb; margin: 20px 0; position: relative;">
+                        <span style="background: #f5f7fa; padding: 0 15px; position: relative; top: -10px; color: #6b7280;">OR</span>
+                    </div>
+                    <a href="{{ route('admin.login') }}" class="btn" style="background: #2c5f8d; color: white; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        Login as Admin
+                    </a>
                     <p style="color: #6b7280; margin-bottom: 15px;">Or sign in with</p>
                     <div style="display: flex; justify-content: center; gap: 15px;">
                         <a href="#" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease;">
