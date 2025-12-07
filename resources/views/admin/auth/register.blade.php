@@ -392,7 +392,7 @@
                     <p>Fill in your details to register as an admin</p>
                 </div>
 
-                <form class="auth-form" method="POST" action="{{ route('admin.register') }}" enctype="multipart/form-data">
+                <form class="auth-form" method="POST" action="{{ route('admin.auth.register') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <div class="input-wrapper">

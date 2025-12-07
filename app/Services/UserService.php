@@ -11,6 +11,7 @@
 
         public function register(array $data)
         {
+            //TODO: add validation for existing email
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],

@@ -65,8 +65,8 @@
                     <span class="text-2xl font-bold text-blue-900">A.K.S.Y.O.N</span>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a href="{{ route('login') }}" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">LOG IN</a>
-                    <a href="{{ route('register') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-md">REGISTER</a>
+                    <a href="{{ route('user.login') }}" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">LOG IN</a>
+                    <a href="{{ route('user.register') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-md">REGISTER</a>
                 </div>
             </div>
         </div>
@@ -91,7 +91,7 @@
                     </p>
                     
                     <div class="flex flex-wrap gap-4 pt-4">
-                        <a href="#" class="group inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        <a href={{ route('user.login') }} class="group inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl">
                             <span>Get Started</span>
                             <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>

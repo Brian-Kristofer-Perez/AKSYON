@@ -362,7 +362,7 @@
                     <h2>Welcome Back!</h2>
                     <p>Already have an account?<br>Log in to access your dashboard<br>and continue your journey with us.</p>
                 </div>
-                <a href="{{ route('login') }}" class="btn btn-outline">Sign In</a>
+                <a href="{{ route('user.login') }}" class="btn btn-outline">Sign In</a>
             </div>
         </div>
         <div class="right-side">
@@ -375,7 +375,7 @@
                     <h2>Create an Account</h2>
                     <p>Join our community today</p>
                 </div>
-                <form method="POST" action="{{ route('register') }}" class="auth-form">
+                <form method="POST" action="{{ route('user.auth.register') }}" class="auth-form">
                     @csrf
                     
                     <div class="form-group">
@@ -459,7 +459,7 @@
                     </div>
                 </form>
                 <div class="login-link">
-                    Already have an account? <a href="{{ route('login') }}">Sign In</a>
+                    Already have an account? <a href="{{ route('user.login') }}">Sign In</a>
                 </div>
                 <div style="text-align: center; margin-top: 30px;">
                     <p style="color: #6b7280; margin-bottom: 15px;">Or sign up with</p>
