@@ -764,7 +764,7 @@
                     <p>Enter your credentials to access the admin dashboard</p>
                 </div>
                 
-                <form method="POST" action="{{ route('admin.login.submit') }}">
+                <form method="POST" action="{{ route('admin.auth.login') }}">
                     @csrf
                     
                     <div class="form-group">
@@ -846,7 +846,7 @@
                 </div>
                 
                 <div style="text-align: center; margin-top: 20px;">
-                    <a href="{{ route('login') }}" style="color: #2c5f8d; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                    <a href="{{ route('user.login') }}" style="color: #2c5f8d; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
                             <circle cx="9" cy="7" r="4"></circle>

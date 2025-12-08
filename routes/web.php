@@ -17,8 +17,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 Route::get('/admin/register', [AuthController::class, 'adminRegistrationPage'])->name('admin.register');
 Route::get('/user/register', [AuthController::class, 'userRegistrationPage'])->name('user.register');
 
-Route::get('/admin/login', [AuthController::class, 'adminRegistrationPage'])->name('admin.login');
-Route::get('/user/login', [AuthController::class, 'userRegistrationPage'])->name('user.login');
+Route::get('/admin/login', [AuthController::class, 'adminLoginPage'])->name('admin.login');
+Route::get('/user/login', [AuthController::class, 'userLoginPage'])->name('user.login');
 
 // Post Routes (Auth)
 Route::post('/admin/register', [AuthController::class, 'adminRegistration'])->name('admin.auth.register');
