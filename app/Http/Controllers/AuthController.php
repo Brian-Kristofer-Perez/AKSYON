@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
         
         // Page routes for login
         function userLoginPage(){
-            return view('auth.login');
+            return view('auth.login'); 
         }
 
         function userRegistrationPage() {
@@ -26,13 +26,12 @@ use Illuminate\Http\Request;
         }
 
         function adminLoginPage(){
-            return view('admin.login');
+            return view('admin.auth.login');
         }
 
         function adminRegistrationPage() {
-            return view('admin.register');
+            return view('admin.auth.register');
         }
-
         
         // POST routes for login
         function userLogin(Request $request){
