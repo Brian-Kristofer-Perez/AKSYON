@@ -206,13 +206,13 @@
                     </svg>
                 </button>
                 <div class="profile-circle w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm cursor-pointer">
-                    RS
+                    {{ substr(auth()->user()->name, 0, 2) }}
                 </div>
-                <button class="text-gray-600 hover:text-red-500 transition-all hover:scale-110">
+                <a href="{{ route('user.logout') }}" class="text-gray-600 hover:text-red-500 transition-all hover:scale-110">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                     </svg>
-                </button>
+                </a>
             </div>
         </div>
     </nav>
@@ -221,7 +221,7 @@
         <!-- Sidebar -->
         <aside class="sidebar w-64 h-screen fixed left-0">
             <div class="p-6 space-y-2">
-                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-600 hover:bg-gray-50">
+                <a href="{{ route('home') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-600 hover:bg-gray-50">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                     </svg>
@@ -233,13 +233,13 @@
                     </svg>
                     <span class="font-semibold">Submit Report</span>
                 </a>
-                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-600 hover:bg-gray-50">
+                <a href="{{ route('map.view') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-600 hover:bg-gray-50">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
                     </svg>
                     <span class="font-semibold">Map View</span>
                 </a>
-                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-600 hover:bg-gray-50">
+                <a href="{{ route('my.reports') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-600 hover:bg-gray-50">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                     </svg>
@@ -272,6 +272,7 @@
                                 <label class="block text-gray-700 font-semibold mb-3">Photo Upload</label>
                                 <div class="upload-area rounded-2xl p-12 text-center cursor-pointer" id="uploadArea">
                                     <input type="file" id="fileInput" class="hidden" accept="image/png, image/jpeg" multiple>
+                                    @csrf
                                     <div class="upload-icon w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6">
                                         <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
