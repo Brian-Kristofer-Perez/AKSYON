@@ -24,7 +24,40 @@ Route::get('/user/login', [AuthController::class, 'userLoginPage'])->name('user.
 Route::post('/admin/register', [AuthController::class, 'adminRegistration'])->name('admin.auth.register');
 Route::post('/user/register', [AuthController::class, 'userRegistration'])->name('user.auth.register');
 
-Route::post('/admin/login', [AuthController::class, 'adminRegistration'])->name('admin.auth.login');
-Route::post('/user/login', [AuthController::class, 'userRegistration'])->name('user.auth.login');
+Route::post('/admin/login', [AuthController::class, 'adminLogin'])->name('admin.auth.login');
+Route::post('/user/login', [AuthController::class, 'userLogin'])->name('user.auth.login');
+
+
+
+// Route::get('/admin-dashboard', function () {
+//     return view('admin-dashboard');
+// });
+
+// Route::get('/home', function () {
+//     return view('home');
+// });
+
+// Route::get('/landing', function () {
+//     return view('landing');
+// });
+
+// Route::get('/map', function () {
+//     return view('map');
+// });
+
+// Route::get('/my-reports', function () {
+//     return view('my-reports');
+// });
+
+// Route::get('/submit-report', function () {
+//     return view('submit-report');
+// });
+
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
+
+
+
 
 ?>
