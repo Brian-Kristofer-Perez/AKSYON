@@ -10,6 +10,10 @@
             $report->save();
         }
 
+        public function getById($id) {
+            return Report::where('userId', $id)->get();
+        }
+
         public function deleteReport(int $reportId) {
             Report::destroy($reportId);
         }
