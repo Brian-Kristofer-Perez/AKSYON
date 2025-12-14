@@ -60,6 +60,21 @@
             box-shadow: 0 4px 15px rgba(44, 95, 141, 0.4);
         }
 
+        .profile-circle {
+            background: linear-gradient(135deg, #2c5f8d 0%, #1e4163 100%);
+            box-shadow: 
+                0 4px 12px rgba(44, 95, 141, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .profile-circle:hover {
+            transform: scale(1.1);
+            box-shadow: 
+                0 6px 16px rgba(44, 95, 141, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2);
+        }
+
         .stat-card {
             position: relative;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -142,25 +157,6 @@
             transform: translateY(-5px);
         }
 
-        .user-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .user-card:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            transform: translateY(-2px);
-        }
-
-        .chart-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            padding: 24px;
-        }
-
         .admin-badge {
             background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             color: white;
@@ -168,6 +164,51 @@
             border-radius: 6px;
             font-size: 10px;
             font-weight: 600;
+        }
+
+        .card-3d {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #2c5f8d 0%, #1e4163 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(44, 95, 141, 0.4);
+        }
+
+        .view-toggle {
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 4px;
+        }
+
+        .view-toggle button {
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .view-toggle button.active {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .view-toggle button:not(.active) {
+            color: #6b7280;
+        }
+
+        .view-toggle button:not(.active):hover {
+            color: #374151;
         }
     </style>
 </head>
@@ -238,8 +279,8 @@
                     <span class="font-semibold">My Reports</span>
                 </a>
                 <a href="{{ route('admin.dashboard') }}" class="sidebar-item active flex items-center space-x-3 px-4 py-3.5 rounded-xl">
-                    <svg "w-,K" fill=""];
-                    <path stroketractor" stroke-linejoin ;="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                     </svg>
                     <span class="font-semibold">Admin Dashboard</span>
                 </a>
@@ -258,174 +299,379 @@
 
         <!-- Main Content -->
         <main class="ml-64 flex-1 p-8">
-            <!-- Admin Stats -->
-            <div class="grid grid-cols-4 gap-6 mb-8">
-                <div class="stat-card bg-gradient-to-br from-red-50 to-white p-6 rounded-2xl shadow-sm">
-                    <div class="flex items-center justify-between">
+            <!-- Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Total Reports -->
+                <div class="stat-card stat-card-purple p-6 rounded-2xl shimmer">
+                    <div class="flex items-start justify-between mb-4">
                         <div>
-                            <p class="text-gray-600 text-sm mb-1">Total Reports</p>
-                            <p class="text-4xl font-bold text-gray-800">247</p>
+                            <p class="text-white/80 font-medium text-sm mb-1">All Reports</p>
+                            <p class="text-5xl font-bold text-white">247</p>
                         </div>
-                        <svg class="w-12 h-12 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div class="stat-card bg-gradient-to-br from-amber-50 to-white p-6 rounded-2xl shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm mb-1">Pending</p>
-                            <p class="text-4xl font-bold text-gray-800">89</p>
-                        </div>
-                        <svg class="w-12 h-12 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div class="stat-card bg-gradient-to-br from-cyan-50 to-white p-6 rounded-2xl shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm mb-1">In Progress</p>
-                            <p class="text-4xl font-bold text-gray-800">124</p>
-                        </div>
-                        <svg class="w-12 h-12 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div class="stat-card bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm mb-1">Resolved</p>
-                            <p class="text-4xl font-bold text-gray-800">34</p>
-                        </div>
-                        <svg class="w-12 h-12 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Charts and Recent Reports -->
-            <div class="grid grid-cols-3 gap-6 mb-8">
-                <!-- Chart -->
-                <div class="chart-container col-span-2">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Reports Overview</h3>
-                    <div class="h-64 flex items-center justify-center text-gray-400">
-                        <div class="text-center">
-                            <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
+                            <svg class="w-8 h-8 text-white icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                             </svg>
-                            <p>Chart will be rendered here</p>
-                            <p class="text-sm">Use Chart.js or similar library</p>
                         </div>
+                    </div>
+                    <div class="flex items-center text-white/90 text-sm">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Total submissions</span>
                     </div>
                 </div>
 
-                <!-- Recent Users -->
-                <div class="bg-white p-6 rounded-2xl shadow-lg">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Users</h3>
-                    <div class="space-y-3">
-                        <div class="user-card p-3 flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                                JD
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-semibold text-gray-800">John Doe</p>
-                                <p class="text-sm text-gray-500">john@example.com</p>
-                            </div>
-                            <span class="text-xs text-gray-400">2h ago</span>
+                <!-- Pending -->
+                <div class="stat-card stat-card-amber p-6 rounded-2xl shimmer">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <p class="text-white/80 font-medium text-sm mb-1">Pending</p>
+                            <p class="text-5xl font-bold text-white">89</p>
                         </div>
-                        <div class="user-card p-3 flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                                JS
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-semibold text-gray-800">Jane Smith</p>
-                                <p class="text-sm text-gray-500">jane@example.com</p>
-                            </div>
-                            <span class="text-xs text-gray-400">5h ago</span>
+                        <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
+                            <svg class="w-8 h-8 text-white icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
                         </div>
-                        <div class="user-card p-3 flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                                RJ
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-semibold text-gray-800">Robert Johnson</p>
-                                <p class="text-sm text-gray-500">robert@example.com</p>
-                            </div>
-                            <span class="text-xs text-gray-400">1d ago</span>
+                    </div>
+                    <div class="flex items-center text-white/90 text-sm">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Awaiting review</span>
+                    </div>
+                </div>
+
+                <!-- In Progress -->
+                <div class="stat-card stat-card-cyan p-6 rounded-2xl shimmer">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <p class="text-white/80 font-medium text-sm mb-1">In Progress</p>
+                            <p class="text-5xl font-bold text-white">124</p>
                         </div>
+                        <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
+                            <svg class="w-8 h-8 text-white icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-white/90 text-sm">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>In progress</span>
+                    </div>
+                </div>
+
+                <!-- Resolved -->
+                <div class="stat-card stat-card-green p-6 rounded-2xl shimmer">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <p class="text-white/80 font-medium text-sm mb-1">Resolved</p>
+                            <p class="text-5xl font-bold text-white">34</p>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
+                            <svg class="w-8 h-8 text-white icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-white/90 text-sm">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Completed</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Recent Reports Table -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div class="p-6 border-b border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-800">Recent Reports</h3>
+            <!-- All Reports Section -->
+            <div class="card-3d p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">All Reports</h2>
+                    <div class="flex items-center space-x-4">
+                        <select class="px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none">
+                            <option>All Status</option>
+                            <option>Pending</option>
+                            <option>In Progress</option>
+                            <option>Resolved</option>
+                        </select>
+                        <div class="view-toggle flex ml-4">
+                        <button id="gridViewBtn" class="active" onclick="toggleView('grid')">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM13 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2h-2z"></path>
+                            </svg>
+                        </button>
+                        <button id="listViewBtn" onclick="toggleView('list')">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    </div>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#247</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">John Doe</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Road Damage</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">40727, -34567</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-amber-100 text-amber-800">Pending</span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dec 10, 2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="text-blue-600 hover:text-blue-900 mr-3">View</button>
-                                    <button class="text-green-600 hover:text-green-900">Assign</button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#246</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Jane Smith</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Street Light</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">41234, -35123</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-cyan-100 text-cyan-800">In Progress</span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dec 9, 2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="text-blue-600 hover:text-blue-900 mr-3">View</button>
-                                    <button class="text-orange-600 hover:text-orange-900">Update</button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#245</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Robert Johnson</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Waste Management</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">41876, -34987</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Resolved</span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dec 8, 2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="text-blue-600 hover:text-blue-900 mr-3">View</button>
-                                    <button class="text-gray-600 hover:text-gray-900">Archive</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                <div id="adminReportsContainer">
+                    <!-- Reports will be loaded here -->
                 </div>
             </div>
         </main>
     </div>
+
+    <!-- Update Status Modal -->
+    <div id="updateModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Update Report Status</h3>
+            <form id="updateForm">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Status</label>
+                    <select id="newStatus" class="w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none">
+                        <option value="pending">Pending</option>
+                        <option value="ongoing">In Progress</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Notes</label>
+                    <textarea id="updateNotes" rows="4" class="w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none" placeholder="Add update notes..."></textarea>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" onclick="closeUpdateModal()" class="px-6 py-2 border-2 border-gray-300 rounded-xl hover:bg-gray-50 transition-colors">Cancel</button>
+                    <button type="submit" class="btn-gradient text-white px-6 py-2 rounded-xl">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // View state
+        let currentView = 'grid'; // 'grid' or 'list'
+        let currentReportId = null;
+        
+        // View toggle function
+        function toggleView(view) {
+            currentView = view;
+            updateViewButtons();
+            renderAdminReports(adminReports);
+        }
+        
+        function updateViewButtons() {
+            const gridBtn = document.getElementById('gridViewBtn');
+            const listBtn = document.getElementById('listViewBtn');
+            
+            if (currentView === 'grid') {
+                gridBtn.classList.add('active');
+                listBtn.classList.remove('active');
+            } else {
+                gridBtn.classList.remove('active');
+                listBtn.classList.add('active');
+            }
+        }
+        
+        // Sample admin reports data
+        const adminReports = [
+            {
+                id: 247,
+                title: "Road Damage",
+                user: "John Doe",
+                location: "40727, -34567",
+                date: "Dec 10, 2025",
+                status: "pending",
+                image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=100&h=100&fit=crop"
+            },
+            {
+                id: 246,
+                title: "Street Light",
+                user: "Jane Smith",
+                location: "41234, -35123",
+                date: "Dec 9, 2025",
+                status: "ongoing",
+                image: "https://images.unsplash.com/photo-1593941707882-a5bac686a2d5?w=100&h=100&fit=crop"
+            },
+            {
+                id: 245,
+                title: "Waste Management",
+                user: "Robert Johnson",
+                location: "41876, -34987",
+                date: "Dec 8, 2025",
+                status: "resolved",
+                image: "https://images.unsplash.com/photo-1605600654924-04d9a119a5bd?w=100&h=100&fit=crop"
+            },
+            {
+                id: 244,
+                title: "Water Leakage",
+                user: "Alice Brown",
+                location: "41567, -34789",
+                date: "Dec 7, 2025",
+                status: "pending",
+                image: "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=100&h=100&fit=crop"
+            },
+            {
+                id: 243,
+                title: "Traffic Signal",
+                user: "Bob Wilson",
+                location: "41345, -35234",
+                date: "Dec 6, 2025",
+                status: "ongoing",
+                image: "https://images.unsplash.com/photo-1584473121925-8c2b1b04acd8?w=100&h=100&fit=crop"
+            }
+        ];
+
+        const statusColors = {
+            resolved: 'bg-green-500',
+            ongoing: 'bg-blue-500',
+            pending: 'bg-amber-500'
+        };
+
+        const statusLabels = {
+            resolved: 'Resolved',
+            ongoing: 'In Progress',
+            pending: 'Pending'
+        };
+
+        function renderAdminReports(reports) {
+            const container = document.getElementById('adminReportsContainer');
+            
+            if (reports.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state text-center py-16">
+                        <div class="w-32 h-32 mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mb-6 shadow-inner">
+                            <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-700 mb-3">No Reports Found</h3>
+                        <p class="text-gray-500 mb-8 max-w-sm mx-auto">There are no reports in the system yet.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            if (currentView === 'list') {
+                // List view (table style)
+                container.innerHTML = `
+                    <div class="overflow-x-auto rounded-xl border border-gray-200">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Report</th>
+                                    <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
+                                    <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
+                                    <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                ${reports.map(report => `
+                                    <tr class="hover:bg-gray-50 cursor-pointer transition-colors">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <img src="${report.image}" alt="${report.title}" class="w-10 h-10 rounded-lg object-cover mr-3">
+                                                <div class="text-sm font-medium text-gray-900">#${report.id} - ${report.title}</div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.user}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.location}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.date}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                                report.status === 'resolved' ? 'bg-green-100 text-green-700' :
+                                                report.status === 'ongoing' ? 'bg-cyan-100 text-cyan-700' :
+                                                'bg-amber-100 text-amber-700'
+                                            }">${statusLabels[report.status]}</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <button onclick="openUpdateModal(${report.id})" class="text-blue-600 hover:text-blue-900 mr-3">Update</button>
+                                            <button onclick="deleteReport(${report.id})" class="text-red-600 hover:text-red-900">Delete</button>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            } else {
+                // Grid view (card style)
+                container.innerHTML = `
+                    <div class="grid grid-cols-3 gap-6">
+                        ${reports.map(report => `
+                            <div class="report-card overflow-hidden">
+                                <img src="${report.image}" alt="${report.title}" class="w-full h-48 object-cover">
+                                <div class="p-6">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="text-lg font-bold text-blue-600">#${report.id} - ${report.title}</span>
+                                        <span class="px-3 py-1 ${
+                                            report.status === 'resolved' ? 'bg-green-100 text-green-700' :
+                                            report.status === 'ongoing' ? 'bg-cyan-100 text-cyan-700' :
+                                            'bg-amber-100 text-amber-700'
+                                        } text-sm font-semibold rounded-full">${statusLabels[report.status]}</span>
+                                    </div>
+                                    <div class="space-y-2 text-sm text-gray-600 mb-4">
+                                        <p><strong>User:</strong> ${report.user}</p>
+                                        <p><strong>Location:</strong> ${report.location}</p>
+                                        <p><strong>Date:</strong> ${report.date}</p>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <button onclick="openUpdateModal(${report.id})" class="text-blue-600 hover:text-blue-900 font-medium">Update Status</button>
+                                        <button onclick="deleteReport(${report.id})" class="text-red-600 hover:text-red-900 font-medium">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        function openUpdateModal(reportId) {
+            currentReportId = reportId;
+            document.getElementById('updateModal').classList.remove('hidden');
+            // Find the current report and set the current status
+            const report = adminReports.find(r => r.id === reportId);
+            if (report) {
+                document.getElementById('newStatus').value = report.status;
+            }
+        }
+
+        function closeUpdateModal() {
+            document.getElementById('updateModal').classList.add('hidden');
+            currentReportId = null;
+            document.getElementById('updateForm').reset();
+        }
+
+        function deleteReport(reportId) {
+            if (confirm('Are you sure you want to delete this report? This action cannot be undone.')) {
+                // Remove the report from the array
+                const index = adminReports.findIndex(r => r.id === reportId);
+                if (index > -1) {
+                    adminReports.splice(index, 1);
+                    renderAdminReports(adminReports);
+                }
+            }
+        }
+
+        // Handle update form submission
+        document.getElementById('updateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newStatus = document.getElementById('newStatus').value;
+            const notes = document.getElementById('updateNotes').value;
+            
+            // Find and update the report
+            const report = adminReports.find(r => r.id === currentReportId);
+            if (report) {
+                report.status = newStatus;
+                renderAdminReports(adminReports);
+                closeUpdateModal();
+            }
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderAdminReports(adminReports);
+        });
+    </script>
 </body>
 </html>
