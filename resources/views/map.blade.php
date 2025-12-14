@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AKSYON - Map View</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Leaflet CSS and Javavoy :) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
@@ -215,7 +220,7 @@
             <!-- Map Container -->
             <div class="relative">
                 <!-- Map Placeholder -->
-                <div class="map-placeholder" style="height: calc(100vh - 120px); position: relative;">
+                <div class="map-placeholder z-0" id="" style="height: calc(100vh - 120px); position: relative;">
                     <div id="map" class="w-full h-full rounded-3xl flex items-center justify-center text-gray-500">
                         <div class="text-center">
                             <svg class="w-24 h-24 mx-auto mb-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -227,8 +232,18 @@
                     </div>
                 </div>
 
+                <script>
+                    let map = L.map('map').setView([14.5995, 120.9842], 13)
+
+                    // OpenStreetMaps source image :))
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map);
+                </script>
+
                 <!-- Legend -->
-                <div class="absolute top-6 right-6 bg-white p-6 rounded-2xl shadow-lg">
+                <div class="z-20 absolute top-6 right-6 bg-white p-6 rounded-2xl shadow-lg">
                     <div class="space-y-3">
                         <div class="legend-item">
                             <div class="map-marker bg-yellow-500"></div>
@@ -246,7 +261,7 @@
                 </div>
 
                 <!-- Filter Panel -->
-                <div class="absolute bottom-6 left-6 bg-white p-6 rounded-2xl shadow-lg" style="width: 300px;">
+                <div class="z-20 absolute bottom-6 left-6 bg-white p-6 rounded-2xl shadow-lg" style="width: 300px;">
                     <div class="space-y-4">
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">Category</label>
