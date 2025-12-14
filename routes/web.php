@@ -28,6 +28,8 @@ Route::post('/admin/login', [AuthController::class, 'adminLogin'])->name('admin.
 Route::post('/user/login', [AuthController::class, 'userLogin'])->name('user.auth.login');
 
 
+Route::post('/admin/logout', [AuthController::class, 'adminLogout'])->name('admin.auth.logout');
+Route::post('/user/logout', [AuthController::class, 'userLogout'])->name('user.auth.logout');
 
 // Route::get('/admin-dashboard', function () {
 //     return view('admin-dashboard');

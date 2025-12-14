@@ -296,7 +296,7 @@
                 <div class="profile-circle w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm cursor-pointer">
                     {{ substr(auth()->user()->name, 0, 2) }}
                 </div>
-                <form action="{{ route('user.logout') }}" method="POST">
+                <form action="{{ route('user.auth.logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="text-gray-600 hover:text-red-500 transition-all hover:scale-110">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

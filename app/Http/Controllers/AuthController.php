@@ -87,6 +87,16 @@ use Illuminate\Http\Request;
             return redirect()->to('home');
         }
 
+        function userLogout($request) {
+            $this->userService->logout();
+            return view('landing');
+        }
+
+        function adminLogout($request) {
+            $this->adminService->logout();
+            return view('landing');
+        }
+
     }
 
 ?>
