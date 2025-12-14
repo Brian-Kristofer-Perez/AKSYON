@@ -263,99 +263,101 @@
 
         <!-- Main Content -->
         <main class="ml-64 flex-1 p-8">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Left Column - Photo Upload -->
-                    <div class="lg:col-span-2 space-y-6">
-                        <div class="card-3d p-8 animate-slide-in">
-                            <h1 class="text-3xl font-bold text-gray-800 mb-2">Submit New Report</h1>
-                            <p class="text-gray-600 mb-8">Report an infrastructure issue in your community</p>
-                            
-                            <div>
-                                <label class="block text-gray-700 font-semibold mb-3">Photo Upload</label>
-                                <div class="upload-area rounded-2xl p-12 text-center cursor-pointer" id="uploadArea">
-                                    <input type="file" id="fileInput" class="hidden" accept="image/png, image/jpeg" multiple>
-                                    @csrf
-                                    <div class="upload-icon w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6">
-                                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                                        </svg>
+            <form method="POST" action="{{ route('home') }}">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Left Column - Photo Upload -->
+                        <div class="lg:col-span-2 space-y-6">
+                            <div class="card-3d p-8 animate-slide-in">
+                                <h1 class="text-3xl font-bold text-gray-800 mb-2">Submit New Report</h1>
+                                <p class="text-gray-600 mb-8">Report an infrastructure issue in your community</p>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-3">Photo Upload</label>
+                                    <div class="upload-area rounded-2xl p-12 text-center cursor-pointer" id="uploadArea">
+                                        <input type="file" id="fileInput" class="hidden" accept="image/png, image/jpeg">
+                                        @csrf
+                                        <div class="upload-icon w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6">
+                                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                            </svg>
+                                        </div>
+                                        <p class="text-gray-700 text-lg mb-2">
+                                            Drop your photo here, or <span class="text-blue-600 font-semibold">browse</span>
+                                        </p>
+                                        <p class="text-gray-400 text-sm">PNG, JPEG up to 10MB</p>
                                     </div>
-                                    <p class="text-gray-700 text-lg mb-2">
-                                        Drop your photo here, or <span class="text-blue-600 font-semibold">browse</span>
-                                    </p>
-                                    <p class="text-gray-400 text-sm">PNG, JPEG up to 10MB</p>
+                                    <div id="previewContainer" class="mt-4 grid grid-cols-3 gap-4"></div>
                                 </div>
-                                <div id="previewContainer" class="mt-4 grid grid-cols-3 gap-4"></div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column - Location & Category -->
+                        <div class="space-y-6">
+                            <!-- Location -->
+                            <div class="card-3d p-6 animate-slide-in" style="animation-delay: 0.1s">
+                                <label class="block text-gray-700 font-semibold mb-4">Location</label>
+                                <div class="grid grid-cols-2 gap-3 mb-4">
+                                    <div>
+                                        <label class="block text-sm text-gray-600 mb-2">Latitude</label>
+                                        <input type="text" class="form-input w-full px-4 py-3 rounded-xl" placeholder="14.5995" id="latitude">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-600 mb-2">Longitude</label>
+                                        <input type="text" class="form-input w-full px-4 py-3 rounded-xl" placeholder="120.9842" id="longitude">
+                                    </div>
+                                </div>
+                                <button class="location-btn w-full px-4 py-3 rounded-xl font-semibold flex items-center justify-center space-x-2" onclick="getCurrentLocation()">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    <span>Use my Current Location</span>
+                                </button>
+                            </div>
+
+                            <!-- Category -->
+                            <div class="category-card p-6 animate-slide-in" style="animation-delay: 0.2s">
+                                <label class="block text-gray-700 font-semibold mb-4">Category</label>
+                                <div class="relative">
+                                    <select class="form-select w-full px-4 py-3 rounded-xl appearance-none cursor-pointer">
+                                        <option value="road-damage">Road Damage</option>
+                                        <option value="street-light">Street Light</option>
+                                        <option value="drainage">Drainage Issue</option>
+                                        <option value="waste">Waste Management</option>
+                                        <option value="traffic">Traffic Signs</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <svg class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-600 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column - Location & Category -->
-                    <div class="space-y-6">
-                        <!-- Location -->
-                        <div class="card-3d p-6 animate-slide-in" style="animation-delay: 0.1s">
-                            <label class="block text-gray-700 font-semibold mb-4">Location</label>
-                            <div class="grid grid-cols-2 gap-3 mb-4">
-                                <div>
-                                    <label class="block text-sm text-gray-600 mb-2">Latitude</label>
-                                    <input type="text" class="form-input w-full px-4 py-3 rounded-xl" placeholder="14.5995" id="latitude">
-                                </div>
-                                <div>
-                                    <label class="block text-sm text-gray-600 mb-2">Longitude</label>
-                                    <input type="text" class="form-input w-full px-4 py-3 rounded-xl" placeholder="120.9842" id="longitude">
-                                </div>
-                            </div>
-                            <button class="location-btn w-full px-4 py-3 rounded-xl font-semibold flex items-center justify-center space-x-2" onclick="getCurrentLocation()">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                                <span>Use my Current Location</span>
-                            </button>
-                        </div>
-
-                        <!-- Category -->
-                        <div class="category-card p-6 animate-slide-in" style="animation-delay: 0.2s">
-                            <label class="block text-gray-700 font-semibold mb-4">Category</label>
-                            <div class="relative">
-                                <select class="form-select w-full px-4 py-3 rounded-xl appearance-none cursor-pointer">
-                                    <option value="road-damage">Road Damage</option>
-                                    <option value="street-light">Street Light</option>
-                                    <option value="drainage">Drainage Issue</option>
-                                    <option value="waste">Waste Management</option>
-                                    <option value="traffic">Traffic Signs</option>
-                                    <option value="other">Other</option>
-                                </select>
-                                <svg class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-600 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </div>
+                    <!-- Description -->
+                    <div class="mt-6 description-card p-8 animate-slide-in" style="animation-delay: 0.3s">
+                        <label class="block text-gray-700 font-semibold mb-4">Description</label>
+                        <div class="relative">
+                            <svg class="absolute left-4 top-4 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                            </svg>
+                            <textarea class="form-textarea w-full pl-12 pr-4 py-4 rounded-xl resize-none" rows="6" placeholder="Describe the issue in detail"></textarea>
                         </div>
                     </div>
-                </div>
 
-                <!-- Description -->
-                <div class="mt-6 description-card p-8 animate-slide-in" style="animation-delay: 0.3s">
-                    <label class="block text-gray-700 font-semibold mb-4">Description</label>
-                    <div class="relative">
-                        <svg class="absolute left-4 top-4 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                        </svg>
-                        <textarea class="form-textarea w-full pl-12 pr-4 py-4 rounded-xl resize-none" rows="6" placeholder="Describe the issue in detail"></textarea>
+                    <!-- Action Buttons -->
+                    <div class="mt-6 flex justify-end space-x-4 animate-slide-in" style="animation-delay: 0.4s">
+                        <button class="btn-secondary px-8 py-3 rounded-xl font-semibold text-gray-700">
+                            Cancel
+                        </button>
+                        <button class="btn-primary px-8 py-3 rounded-xl font-semibold text-white">
+                            Submit
+                        </button>
                     </div>
                 </div>
-
-                <!-- Action Buttons -->
-                <div class="mt-6 flex justify-end space-x-4 animate-slide-in" style="animation-delay: 0.4s">
-                    <button class="btn-secondary px-8 py-3 rounded-xl font-semibold text-gray-700">
-                        Cancel
-                    </button>
-                    <button class="btn-primary px-8 py-3 rounded-xl font-semibold text-white">
-                        Submit
-                    </button>
-                </div>
-            </div>
+            </form>
         </main>
     </div>
 

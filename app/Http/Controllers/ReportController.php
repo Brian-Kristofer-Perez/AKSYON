@@ -26,4 +26,13 @@ class ReportController extends Controller
 
         return view('submit-report');
     }
+
+    function submitReport(Request $request) {
+
+        $input = $request->validate([
+
+        ]);
+
+        $this->reportService->addReport();
+    }
 }

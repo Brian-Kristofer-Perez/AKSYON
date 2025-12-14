@@ -40,6 +40,8 @@ Route::get('/my-reports', [ReportController::class, 'myReports'])->name('my.repo
 
 Route::get('/submit-report', [ReportController::class, 'submitReportsPage'])->name('submit.report');
 
+Route::post('/reports')
+
 
 
 // Route::get('/admin-dashboard', function () {
