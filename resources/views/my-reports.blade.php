@@ -468,12 +468,12 @@
                         </div>
                         <h3 class="text-2xl font-bold text-gray-700 mb-3">No Reports Found</h3>
                         <p class="text-gray-500 mb-8 max-w-sm mx-auto">You haven't submitted any reports yet. Start making a difference in your community today!</p>
-                        <button class="btn-gradient text-white px-8 py-4 rounded-xl font-semibold inline-flex items-center space-x-2">
+                        <a href="{{ route('submit.report') }}" class="btn-gradient text-white px-8 py-4 rounded-xl font-semibold inline-flex items-center space-x-2 no-underline" style="position: relative; z-index: 1000;">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                             </svg>
                             <span>Submit Your First Report</span>
-                        </button>
+                        </a>
                     </div>
                 `;
                 return;

@@ -490,29 +490,29 @@
                             </div>
                             <p class="text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-2" id="myReportsCount">3</p>
                             <p class="text-gray-600 mb-6 font-medium">Reports Submitted</p>
-                            <button class="w-full btn-gradient text-white px-6 py-4 rounded-xl font-semibold">
+                            <a href="{{ route('my.reports') }}" style="display: block; width: 100%; background: linear-gradient(135deg, #2c5f8d 0%, #1e4163 100%); color: white; padding: 1rem 1.5rem; border-radius: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 4px 15px rgba(44, 95, 141, 0.4); transition: all 0.3s; text-align: center; position: relative; z-index: 1000;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(44, 95, 141, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(44, 95, 141, 0.4)';">
                                 View My Reports
-                            </button>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Quick Actions -->
                     @if(!Auth::guard('admin')->check())
-                    <div class="quick-action-card card-3d p-8">
+                    <div class="quick-action-card card-3d p-8" style="position: relative; z-index: 999;">
                         <h2 class="text-xl font-bold text-gray-800 mb-4">Quick Actions</h2>
                         <div class="space-y-3">
-                            <button class="w-full bg-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-cyan-50 text-gray-700 hover:text-blue-600 px-6 py-4 rounded-xl font-semibold transition-all flex items-center justify-center space-x-2 shadow-sm hover:shadow-md border border-gray-100">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <a href="{{ route('submit.report') }}" style="display: block; width: 100%; background: white; color: #374151; padding: 1rem 1.5rem; border-radius: 0.75rem; font-weight: 600; text-decoration: none; border: 1px solid #f3f4f6; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; position: relative; z-index: 1000;" onmouseover="this.style.background='linear-gradient(to right, #eff6ff, #f0f9ff)'; this.style.color='#2563eb';" onmouseout="this.style.background='white'; this.style.color='#374151';">
+                                <svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
                                 <span>Submit Report</span>
-                            </button>
-                            <button class="w-full bg-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-cyan-50 text-gray-700 hover:text-blue-600 px-6 py-4 rounded-xl font-semibold transition-all flex items-center justify-center space-x-2 shadow-sm hover:shadow-md border border-gray-100">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            </a>
+                            <a href="{{ route('map.view') }}" style="display: block; width: 100%; background: white; color: #374151; padding: 1rem 1.5rem; border-radius: 0.75rem; font-weight: 600; text-decoration: none; border: 1px solid #f3f4f6; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; position: relative; z-index: 1000;" onmouseover="this.style.background='linear-gradient(to right, #eff6ff, #f0f9ff)'; this.style.color='#2563eb';" onmouseout="this.style.background='white'; this.style.color='#374151';">
+                                <svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
                                 </svg>
                                 <span>View Map</span>
-                            </button>
+                            </a>
                         </div>
                     </div>
                     @endif
@@ -567,12 +567,12 @@
                         </div>
                         <h3 class="text-2xl font-bold text-gray-700 mb-3">No Recent Reports</h3>
                         <p class="text-gray-500 mb-8 max-w-sm mx-auto">You haven't submitted any reports yet. Start making a difference in your community today!</p>
-                        <button class="btn-gradient text-white px-8 py-4 rounded-xl font-semibold inline-flex items-center space-x-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('submit.report') }}" style="display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #2c5f8d 0%, #1e4163 100%); color: white; padding: 1rem 2rem; border-radius: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 4px 15px rgba(44, 95, 141, 0.4); transition: all 0.3s; position: relative; z-index: 1000;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(44, 95, 141, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(44, 95, 141, 0.4)';">
+                            <svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                             </svg>
                             <span>Submit Your First Report</span>
-                        </button>
+                        </a>
                     </div>
                 `;
                 return;

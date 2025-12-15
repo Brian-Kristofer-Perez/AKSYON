@@ -23,6 +23,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $reports = [];
+        
+        if (!Auth::guard('admin')->check()) {
+            // For regular users, get their own reports
+            $reports = \App\Models\Report::where('user_id', Auth::guard('web')->id())
+                ->orderBy('created_at', 'desc')
+                ->get();
+        } else {
+            // For admins, get all reports
+            $reports = \App\Models\Report::orderBy('created_at', 'desc')->get();
+        }
+        
+        return view('home', ['reports' => $reports]);
     }
 }
