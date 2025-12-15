@@ -20,9 +20,6 @@ return new class extends Migration
             $table->text('description');
             $table->string('category');
             $table->dateTime('date');
-            $table->foreignId('userId')
-                ->constrained('users')
-                ->onDelete('cascade');
             $table->string('status');
             $table->text('image');
             $table->string('image_mime');

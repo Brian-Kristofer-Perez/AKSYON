@@ -26,11 +26,7 @@ class Admin extends Authenticatable
         return [
             'id' => 'int',
             'email' => 'string',
-            'card_id' => 'string',
             'password' => 'hashed',
-            'profile_image' => 'string',
-            'profile_image_mime' => 'string',
-            'specimen_signature' => 'string'
         ];
     }
 }
