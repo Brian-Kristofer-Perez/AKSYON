@@ -304,7 +304,7 @@
                     <div class="flex items-start justify-between mb-4">
                         <div>
                             <p class="text-white/80 font-medium text-sm mb-1">My Reports</p>
-                            <p class="text-5xl font-bold text-white">3</p>
+                            <p class="text-5xl font-bold text-white" id="totalReports"></p>
                         </div>
                         <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
                             <svg class="w-8 h-8 text-white icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -325,7 +325,7 @@
                     <div class="flex items-start justify-between mb-4">
                         <div>
                             <p class="text-white/80 font-medium text-sm mb-1">Pending</p>
-                            <p class="text-5xl font-bold text-white">1</p>
+                            <p class="text-5xl font-bold text-white" id="pendingReports"></p>
                         </div>
                         <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
                             <svg class="w-8 h-8 text-white icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -346,7 +346,7 @@
                     <div class="flex items-start justify-between mb-4">
                         <div>
                             <p class="text-white/80 font-medium text-sm mb-1">In Progress</p>
-                            <p class="text-5xl font-bold text-white">1</p>
+                            <p class="text-5xl font-bold text-white" id="ongoingReports"></p>
                         </div>
                         <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
                             <svg class="w-8 h-8 text-white icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -367,7 +367,7 @@
                     <div class="flex items-start justify-between mb-4">
                         <div>
                             <p class="text-white/80 font-medium text-sm mb-1">Resolved</p>
-                            <p class="text-5xl font-bold text-white">1</p>
+                            <p class="text-5xl font-bold text-white" id="resolvedReports"></p>
                         </div>
                         <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
                             <svg class="w-8 h-8 text-white icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -544,9 +544,24 @@
             }
         }
 
+
+        function updateStats(reports) {
+            const total = reports.length;
+            const pending = reports.filter(r => r.status === 'Pending').length;
+            const ongoing = reports.filter(r => r.status === 'Ongoing').length;
+            const resolved = reports.filter(r => r.status === 'Resolved').length;
+
+            document.getElementById('totalReports').textContent = total;
+            document.getElementById('pendingReports').textContent = pending;
+            document.getElementById('ongoingReports').textContent = ongoing;
+            document.getElementById('resolvedReports').textContent = resolved;
+            document.getElementById('myReportsCount').textContent = total;
+        }
+
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
             renderMyReports(myReports);
+            updateStats(myReports);
         });
     </script>
 </body>

@@ -250,9 +250,12 @@
                     }}
                 </div>
                 <form method="POST" action="{{ route('admin.auth.logout') }}" class="text-gray-600 hover:text-red-500 transition-all hover:scale-110">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                    </svg>
+                    @csrf
+                    <button>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                        </svg>
+                    </button>
                 </form>
             </div>
         </div>
@@ -324,7 +327,7 @@
                     <div class="flex items-start justify-between mb-4">
                         <div>
                             <p class="text-white/80 font-medium text-sm mb-1">All Reports</p>
-                            <p class="text-5xl font-bold text-white">247</p>
+                            <p class="text-5xl font-bold text-white" id="totalReports"></p>
                         </div>
                         <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
                             <svg class="w-8 h-8 text-white icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -345,7 +348,7 @@
                     <div class="flex items-start justify-between mb-4">
                         <div>
                             <p class="text-white/80 font-medium text-sm mb-1">Pending</p>
-                            <p class="text-5xl font-bold text-white">89</p>
+                            <p class="text-5xl font-bold text-white" id="pendingReports"></p>
                         </div>
                         <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
                             <svg class="w-8 h-8 text-white icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -366,7 +369,7 @@
                     <div class="flex items-start justify-between mb-4">
                         <div>
                             <p class="text-white/80 font-medium text-sm mb-1">In Progress</p>
-                            <p class="text-5xl font-bold text-white">124</p>
+                            <p class="text-5xl font-bold text-white" id="ongoingReports"></p>
                         </div>
                         <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
                             <svg class="w-8 h-8 text-white icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -387,7 +390,7 @@
                     <div class="flex items-start justify-between mb-4">
                         <div>
                             <p class="text-white/80 font-medium text-sm mb-1">Resolved</p>
-                            <p class="text-5xl font-bold text-white">34</p>
+                            <p class="text-5xl font-bold text-white" id="resolvedReports"></p>
                         </div>
                         <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
                             <svg class="w-8 h-8 text-white icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -628,9 +631,25 @@
             }
         }
 
+
+        function updateStats(reports) {
+            const total = reports.length;
+            const pending = reports.filter(r => r.status === 'Pending').length;
+            const ongoing = reports.filter(r => r.status === 'Ongoing').length;
+            const resolved = reports.filter(r => r.status === 'Resolved').length;
+
+            document.getElementById('totalReports').textContent = total;
+            document.getElementById('pendingReports').textContent = pending;
+            document.getElementById('ongoingReports').textContent = ongoing;
+            document.getElementById('resolvedReports').textContent = resolved;
+            document.getElementById('myReportsCount').textContent = total;
+        }
+
+
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
             renderAdminReports(adminReports);
+            updateStats(adminReports);
         });
     </script>
 

@@ -618,9 +618,9 @@
 
         function updateStats(reports) {
             const total = reports.length;
-            const pending = reports.filter(r => r.status === 'pending').length;
-            const ongoing = reports.filter(r => r.status === 'ongoing').length;
-            const resolved = reports.filter(r => r.status === 'resolved').length;
+            const pending = reports.filter(r => r.status === 'Pending').length;
+            const ongoing = reports.filter(r => r.status === 'Ongoing').length;
+            const resolved = reports.filter(r => r.status === 'Resolved').length;
 
             document.getElementById('totalReports').textContent = total;
             document.getElementById('pendingReports').textContent = pending;
