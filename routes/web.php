@@ -10,7 +10,13 @@ use App\Http\Controllers\AuthController;
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
 // Home Route (Protected by auth middleware)
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+Route::get('/home', function () {
+
+    $service = new ReportService();
+    $reports = $service->getAll();
+
+    return view("home", ['reports' => $reports]);
+})
     ->name('home')
     ->middleware('auth:web,admin');
 

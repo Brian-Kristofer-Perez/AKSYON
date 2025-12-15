@@ -540,52 +540,18 @@
             )
         }}";
 
-        // Sample data - replace with actual data from your backend
-        const reportsData = [
-            {
-                id: 1,
-                title: "Road Damage",
-                location: "40727, -34567",
-                date: "Nov 17, 2025",
-                status: "resolved",
-                image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=100&h=100&fit=crop"
-            },
-            {
-                id: 2,
-                title: "Road Damage",
-                location: "40727, -34567",
-                date: "Nov 17, 2025",
-                status: "ongoing",
-                image: "https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=100&h=100&fit=crop"
-            },
-            {
-                id: 3,
-                title: "Road Damage",
-                location: "40727, -34567",
-                date: "Nov 17, 2025",
-                status: "resolved",
-                image: "https://images.unsplash.com/photo-1599091127568-e0ce79c97134?w=100&h=100&fit=crop"
-            },
-            {
-                id: 4,
-                title: "Street Light",
-                location: "40727, -34567",
-                date: "Nov 17, 2025",
-                status: "pending",
-                image: "https://images.unsplash.com/photo-1518135714426-c18f5ffb6f4d?w=100&h=100&fit=crop"
-            }
-        ];
+        const reportsData = @json($reports)
 
         const statusColors = {
-            resolved: 'bg-green-500',
-            ongoing: 'bg-blue-500',
-            pending: 'bg-amber-500'
+            Resolved: 'bg-green-500',
+            Ongoing: 'bg-blue-500',
+            Pending: 'bg-amber-500'
         };
 
         const statusLabels = {
-            resolved: 'Resolved',
-            ongoing: 'In Progress',
-            pending: 'Pending'
+            Resolved: 'Resolved',
+            Ongoing: 'In Progress',
+            Pending: 'Pending'
         };
 
         function renderReports(reports) {
@@ -615,7 +581,7 @@
             container.innerHTML = reports.map(report => `
                 <div class="report-item flex items-center space-x-4 p-4 mb-3 cursor-pointer group">
                     <div class="report-image flex-shrink-0">
-                        <img src="${report.image}" alt="${report.title}" class="w-20 h-20 rounded-xl object-cover shadow-md">
+                        <img src="data:${report.image_mime};base64,${report.image}" alt="${report.title}" class="w-20 h-20 rounded-xl object-cover shadow-md">
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center space-x-3 mb-2">
@@ -633,13 +599,13 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
-                                <span class="font-medium">${report.location}</span>
+                                <span class="font-medium">lat: ${report.latitude}, lon: ${report.longitude}</span>
                             </div>
                             <div class="flex items-center space-x-1">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
-                                <span>${report.date}</span>
+                                <span>${report.date.split('T')[0]}</span>
                             </div>
                         </div>
                     </div>

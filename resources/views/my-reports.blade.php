@@ -441,44 +441,18 @@
             }
         }
         
-        // Sample reports data
-        const myReports = [
-            {
-                id: 1,
-                title: "Road Damage",
-                location: "40727, -34567",
-                date: "Nov 17, 2025",
-                status: "pending",
-                image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=100&h=100&fit=crop"
-            },
-            {
-                id: 2,
-                title: "Street Light",
-                location: "41234, -35123",
-                date: "Nov 15, 2025",
-                status: "ongoing",
-                image: "https://images.unsplash.com/photo-1593941707882-a5bac686a2d5?w=100&h=100&fit=crop"
-            },
-            {
-                id: 3,
-                title: "Waste Management",
-                location: "41876, -34987",
-                date: "Nov 10, 2025",
-                status: "resolved",
-                image: "https://images.unsplash.com/photo-1605600654924-04d9a119a5bd?w=100&h=100&fit=crop"
-            }
-        ];
+        const myReports = @json($reports);
 
         const statusColors = {
-            resolved: 'bg-green-500',
-            ongoing: 'bg-blue-500',
-            pending: 'bg-amber-500'
+            Resolved: 'bg-green-500',
+            Ongoing: 'bg-blue-500',
+            Pending: 'bg-amber-500'
         };
 
         const statusLabels = {
-            resolved: 'Resolved',
-            ongoing: 'In Progress',
-            pending: 'Pending'
+            Resolved: 'Resolved',
+            Ongoing: 'In Progress',
+            Pending: 'Pending'
         };
 
         function renderMyReports(reports) {
@@ -523,16 +497,16 @@
                                     <tr class="hover:bg-gray-50 cursor-pointer transition-colors">
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
-                                                <img src="${report.image}" alt="${report.title}" class="w-10 h-10 rounded-lg object-cover mr-3">
+                                                <img src="data:${report.image_mime};base64,${report.image}" alt="${report.title}" class="w-10 h-10 rounded-lg object-cover mr-3">
                                                 <div class="text-sm font-medium text-gray-900">${report.title}</div>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.location}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.date}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">lat: ${report.latitude}, lon: ${report.longitude}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.date.split('T')[0]}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                                                report.status === 'resolved' ? 'bg-green-100 text-green-700' :
-                                                report.status === 'ongoing' ? 'bg-blue-100 text-blue-700' :
+                                                report.status === 'Resolved' ? 'bg-green-100 text-green-700' :
+                                                report.status === 'Ongoing' ? 'bg-blue-100 text-blue-700' :
                                                 'bg-amber-100 text-amber-700'
                                             }">${statusLabels[report.status]}</span>
                                         </td>
@@ -548,19 +522,19 @@
                     <div class="grid grid-cols-3 gap-6">
                         ${reports.map(report => `
                             <div class="report-card overflow-hidden">
-                                <img src="${report.image}" alt="${report.title}" class="w-full h-48 object-cover">
+                                <img src="data:${report.image_mime};base64,${report.image}" alt="${report.title}" class="w-full h-48 object-cover">
                                 <div class="p-6">
                                     <div class="flex items-center justify-between mb-4">
                                         <span class="text-lg font-bold text-blue-600">${report.title}</span>
                                         <span class="px-3 py-1 ${
-                                            report.status === 'resolved' ? 'bg-green-100 text-green-700' :
-                                            report.status === 'ongoing' ? 'bg-cyan-100 text-cyan-700' :
+                                            report.status === 'Resolved' ? 'bg-green-100 text-green-700' :
+                                            report.status === 'Ongoing' ? 'bg-cyan-100 text-cyan-700' :
                                             'bg-amber-100 text-amber-700'
                                         } text-sm font-semibold rounded-full">${statusLabels[report.status]}</span>
                                     </div>
                                     <div class="space-y-2 text-sm text-gray-600">
-                                        <p>${report.location}</p>
-                                        <p>${report.date}</p>
+                                        <p>lat: ${report.latitude}, lon: ${report.longitude}</p>
+                                        <p>${report.date.split('T')[0]}</p>
                                     </div>
                                 </div>
                             </div>

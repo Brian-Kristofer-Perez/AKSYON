@@ -20,7 +20,7 @@ class ReportController extends Controller
         $currentUserId = Auth::id();
         $reports = $this->reportService->getById($currentUserId);
 
-        return view('my-reports');
+        return view('my-reports', ['reports' => $reports]);
     }
 
     function submitReportsPage() {
