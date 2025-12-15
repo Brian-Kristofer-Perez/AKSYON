@@ -20,7 +20,7 @@ class Report extends Model
        'image_mime'
     ];
 
-    protected function updates() {
+    public function updates() {
         return $this->hasMany(StatusUpdate::class);
     }
 

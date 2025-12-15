@@ -17,14 +17,14 @@ return new class extends Migration
             $table->string('title');
             $table->double('latitude');
             $table->double('longitude');
-            $table->string('description');
+            $table->text('description');
             $table->string('category');
             $table->dateTime('date');
             $table->foreignId('userId')
                 ->constrained('users')
                 ->onDelete('cascade');
             $table->string('status');
-            $table->string('image');
+            $table->text('image');
             $table->string('image_mime');
         });
     }

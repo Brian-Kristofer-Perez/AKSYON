@@ -270,7 +270,7 @@
 
         <!-- Main Content -->
         <main class="ml-64 flex-1 p-8">
-            <form method="POST" action="{{ route('home') }}">
+            <form method="POST" action="{{ route('submit.report.post') }}" enctype="multipart/form-data">
                 <div class="max-w-7xl mx-auto">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <!-- Left Column - Photo Upload -->
@@ -314,7 +314,7 @@
                                         <input name="longitude" type="text" class="form-input w-full px-4 py-3 rounded-xl" placeholder="120.9842" id="longitude">
                                     </div>
                                 </div>
-                                <button class="location-btn w-full px-4 py-3 rounded-xl font-semibold flex items-center justify-center space-x-2" onclick="getCurrentLocation()">
+                                <button class="location-btn w-full px-4 py-3 rounded-xl font-semibold flex items-center justify-center space-x-2" onclick="getCurrentLocation()" type="button">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -356,10 +356,10 @@
 
                     <!-- Action Buttons -->
                     <div class="mt-6 flex justify-end space-x-4 animate-slide-in" style="animation-delay: 0.4s">
-                        <button class="btn-secondary px-8 py-3 rounded-xl font-semibold text-gray-700">
+                        <button type="button" class="btn-secondary px-8 py-3 rounded-xl font-semibold text-gray-700">
                             Cancel
                         </button>
-                        <button class="btn-primary px-8 py-3 rounded-xl font-semibold text-white">
+                        <button type="submit" class="btn-primary px-8 py-3 rounded-xl font-semibold text-white">
                             Submit
                         </button>
                     </div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Services\ReportService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use App\Models\Report;
 
 class ReportController extends Controller
 {
@@ -27,12 +29,45 @@ class ReportController extends Controller
         return view('submit-report');
     }
 
-    function submitReport(Request $request) {
-
-        $input = $request->validate([
-
+    function submitReport(Request $request){
+        $validated = $request->validate([
+            'category'    => 'required|string',
+            'latitude'    => 'required',
+            'longitude'   => 'required',
+            'description' => 'required|string',
+            'photo'       => 'required|image|mimes:jpeg,png',
         ]);
 
-        $this->reportService->addReport();
+        $imageBase64 = null;
+        $mimeType = null;
+
+        $file = $request->file('photo');
+        $mimeType = $file->getMimeType();
+
+        // Base64 encoding for convenience
+        $fileContents = file_get_contents($file->getRealPath());
+        $imageBase64 = base64_encode($fileContents);
+
+        
+        // Gonna create a title automatically
+        $cleanCategory = Str::headline($validated['category']);
+        $dateString = now()->format('Y-m-d');
+
+        // Create a report and manually inject values via setter (Illuminate doesn't like constructors)
+        $report = new Report();
+        $report->title = "$cleanCategory - $dateString";
+        $report->latitude = $request->latitude;
+        $report->longitude = $request->longitude;
+        $report->description = $request->description;
+        $report->category = $request->category;
+        $report->date = now();        
+        $report->image = $imageBase64; 
+        $report->image_mime = $mimeType;
+        $report->userId = Auth::guard('web')->id();   
+        $report->status = 'Pending';    
+
+        $this->reportService->addReport($report);
+
+        return redirect()->to('home');
     }
 }
