@@ -11,7 +11,7 @@ Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 // Home Route (Protected by auth middleware)
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('home')
-    ->middleware('auth:web');
+    ->middleware('auth:web,admin');
 
 
 // Auth pages
@@ -34,14 +34,15 @@ Route::post('/user/logout', [AuthController::class, 'userLogout'])->name('user.a
 
 Route::get('/map', function () {
     return view('map');
-})->middleware('auth:web')->name('map.view');
+})->middleware('auth:web,admin')->name('map.view');
 
 Route::get('/my-reports', [ReportController::class, 'myReports'])->name('my.reports');
-
 Route::get('/submit-report', [ReportController::class, 'submitReportsPage'])->name('submit.report');
+Route::post('/reports', [ReportController::class, 'submitReport']);
 
-Route::post('/reports', [ReportController::class, 'submitReport'])
-
+Route::get('/admin/dashboard', function () {
+    return view('admin-dashboard');
+})->middleware('auth:admin')->name('admin.dashboard');
 
 
 // Route::get('/admin-dashboard', function () {
