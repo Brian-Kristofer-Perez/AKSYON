@@ -65,26 +65,26 @@ use Illuminate\Http\Request;
 
             $credentials = $request->validate([
                 'email' => ['required', 'email'],
-                'password' => ['required', 'password'] 
+                'password' => ['required', 'string'] 
             ]);
 
             $this->adminService->login($credentials['email'], $credentials['password']);
 
             // TODO: Add redirect to admin page
-            return redirect()->to('home');
+            return view('home');
         }
 
-        function adminRegistration($request) {
+        function adminRegistration(Request $request) {
 
             $credentials = $request->validate([
                 'name' => ['required', 'string'],
                 'email' => ['required', 'email'],
-                'password' => ['required', 'password'] 
+                'password' => ['required', 'string'] 
             ]);
 
-            $this->adminService->register($request->data);
+            $this->adminService->register($credentials);
             // TODO: Add redirect to admin page
-            return redirect()->to('home');
+            return view('home');
         }
 
         function userLogout(Request $request) {

@@ -151,7 +151,9 @@
                     </svg>
                 </button>
                 <div class="profile-circle w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm cursor-pointer">
-                    {{ substr(auth()->user()->name, 0, 2) }}
+                    {{ 
+                        substr(auth(Auth::guard('admin')->check() ? 'admin' : 'web')->user()->name, 0, 2)
+                    }}
                 </div>
                 <form action="{{ route('user.auth.logout') }}" method="POST">
                     @csrf

@@ -294,7 +294,9 @@
                     </svg>
                 </button>
                 <div class="profile-circle w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm cursor-pointer">
-                    {{ substr(auth()->user()->name, 0, 2) }}
+                    {{ 
+                        substr(auth(Auth::guard('admin')->check() ? 'admin' : 'web')->user()->name, 0, 2)
+                     }}
                 </div>
                 <form action="{{ route('user.auth.logout') }}" method="POST">
                     @csrf
@@ -511,10 +513,10 @@
 
     <script>
         // Set user name dynamically
-        document.getElementById('userName').textContent = "{{ auth()->user()->name }}";
+        document.getElementById('userName').textContent = "{{ substr(auth(Auth::guard('admin')->check() ? 'admin' : 'web')->user()->name, 0, 2) }}";
 
         // Set profile initials
-        document.querySelector('.profile-circle').textContent = "{{ substr(auth()->user()->name, 0, 2) }}";
+        document.querySelector('.profile-circle').textContent = "{{ substr(auth(Auth::guard('admin')->check() ? 'admin' : 'web')->user()->name, 0, 2) }}";
 
         // Sample data - replace with actual data from your backend
         const reportsData = [

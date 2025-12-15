@@ -206,7 +206,9 @@
                     </svg>
                 </button>
                 <div class="profile-circle w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm cursor-pointer">
-                    {{ substr(auth()->user()->name, 0, 2) }}
+                    {{
+                        substr(auth(Auth::guard('admin')->check() ? 'admin' : 'web')->user()->name, 0, 2) 
+                    }}
                 </div>
                 <form action="{{ route('user.auth.logout') }}" method="POST">
                     @csrf
@@ -275,7 +277,7 @@
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-3">Photo Upload</label>
                                     <div class="upload-area rounded-2xl p-12 text-center cursor-pointer" id="uploadArea">
-                                        <input type="file" id="fileInput" class="hidden" accept="image/png, image/jpeg">
+                                        <input name="photo" type="file" id="fileInput" class="hidden" accept="image/png, image/jpeg">
                                         @csrf
                                         <div class="upload-icon w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6">
                                             <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -300,11 +302,11 @@
                                 <div class="grid grid-cols-2 gap-3 mb-4">
                                     <div>
                                         <label class="block text-sm text-gray-600 mb-2">Latitude</label>
-                                        <input type="text" class="form-input w-full px-4 py-3 rounded-xl" placeholder="14.5995" id="latitude">
+                                        <input name="latitude" type="text" class="form-input w-full px-4 py-3 rounded-xl" placeholder="14.5995" id="latitude">
                                     </div>
                                     <div>
                                         <label class="block text-sm text-gray-600 mb-2">Longitude</label>
-                                        <input type="text" class="form-input w-full px-4 py-3 rounded-xl" placeholder="120.9842" id="longitude">
+                                        <input name="longitude" type="text" class="form-input w-full px-4 py-3 rounded-xl" placeholder="120.9842" id="longitude">
                                     </div>
                                 </div>
                                 <button class="location-btn w-full px-4 py-3 rounded-xl font-semibold flex items-center justify-center space-x-2" onclick="getCurrentLocation()">
@@ -320,7 +322,7 @@
                             <div class="category-card p-6 animate-slide-in" style="animation-delay: 0.2s">
                                 <label class="block text-gray-700 font-semibold mb-4">Category</label>
                                 <div class="relative">
-                                    <select class="form-select w-full px-4 py-3 rounded-xl appearance-none cursor-pointer">
+                                    <select name="category" class="form-select w-full px-4 py-3 rounded-xl appearance-none cursor-pointer">
                                         <option value="road-damage">Road Damage</option>
                                         <option value="street-light">Street Light</option>
                                         <option value="drainage">Drainage Issue</option>
@@ -343,7 +345,7 @@
                             <svg class="absolute left-4 top-4 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                             </svg>
-                            <textarea class="form-textarea w-full pl-12 pr-4 py-4 rounded-xl resize-none" rows="6" placeholder="Describe the issue in detail"></textarea>
+                            <textarea name="description" class="form-textarea w-full pl-12 pr-4 py-4 rounded-xl resize-none" rows="6" placeholder="Describe the issue in detail"></textarea>
                         </div>
                     </div>
 

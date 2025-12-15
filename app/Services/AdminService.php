@@ -10,7 +10,7 @@
     {
         public function register(array $data)
         {
-            $admin = admin::create([
+            $admin = Admin::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
