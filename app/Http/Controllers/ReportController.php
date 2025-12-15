@@ -83,4 +83,9 @@ class ReportController extends Controller
 
         return redirect()->route('home');
     }
+
+    function deleteReport(Request $request) {
+        $this->reportService->deleteReport($request->input('report_id'));
+        return redirect()->route('home');
+    }
 }

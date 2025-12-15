@@ -65,6 +65,8 @@ Route::post('/reports/update', [ReportController::class, 'addUpdate'])
     ->middleware('auth:admin')
     ->name('report.update');
 
-
+Route::delete('/reports', [ReportController::class, 'deleteReport'])
+    ->middleware('auth:admin')
+    ->name('report.delete');
 
 ?>

@@ -465,6 +465,13 @@
         </div>
     </div>
 
+    <!-- Hidden global form to track state -->
+    <form id="deleteReportForm" method="POST" action="{{ route('report.delete') }}" class="hidden">
+        @csrf
+        @method('DELETE')
+        <input type="hidden" name="report_id" id="deleteIdInput">
+    </form>
+
     <script>
         // View state
         let currentView = 'grid'; // 'grid' or 'list'
@@ -546,7 +553,6 @@
                                                 <div class="text-sm font-medium text-gray-900">#${report.id} - ${report.title}</div>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.user}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">lat: ${report.latitude}, lon: ${report.longitude}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.date.split('T')[0]}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -583,7 +589,6 @@
                                         } text-sm font-semibold rounded-full">${statusLabels[report.status]}</span>
                                     </div>
                                     <div class="space-y-2 text-sm text-gray-600 mb-4">
-                                        <p><strong>User:</strong> ${report.user}</p>
                                         <p><strong>Location:</strong> lat: ${report.latitude}, lon: ${report.longitude} </p>
                                         <p><strong>Date:</strong> ${report.date.split('T')[0]}</p>
                                     </div>
@@ -618,12 +623,8 @@
 
         function deleteReport(reportId) {
             if (confirm('Are you sure you want to delete this report? This action cannot be undone.')) {
-                // Remove the report from the array
-                const index = adminReports.findIndex(r => r.id === reportId);
-                if (index > -1) {
-                    adminReports.splice(index, 1);
-                    renderAdminReports(adminReports);
-                }
+                document.getElementById('deleteIdInput').value = reportId;
+                document.getElementById('deleteReportForm').submit(); 
             }
         }
 
@@ -632,5 +633,6 @@
             renderAdminReports(adminReports);
         });
     </script>
+
 </body>
 </html>
