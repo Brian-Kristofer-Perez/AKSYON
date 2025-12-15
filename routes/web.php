@@ -36,9 +36,9 @@ Route::get('/map', function () {
     return view('map');
 })->middleware('auth:web,admin')->name('map.view');
 
-Route::get('/my-reports', [ReportController::class, 'myReports'])->name('my.reports');
-Route::get('/submit-report', [ReportController::class, 'submitReportsPage'])->name('submit.report');
-Route::post('/reports', [ReportController::class, 'submitReport']);
+Route::get('/my-reports', [ReportController::class, 'myReports'])->name('my.reports')->middleware('auth:web');
+Route::get('/submit-report', [ReportController::class, 'submitReportsPage'])->name('submit.report')->middleware('auth:web');
+Route::post('/reports', [ReportController::class, 'submitReport'])->middleware('auth:web');
 
 Route::get('/admin/dashboard', function () {
     return view('admin-dashboard');

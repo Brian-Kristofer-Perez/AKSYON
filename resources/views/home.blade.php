@@ -320,24 +320,32 @@
                     </svg>
                     <span class="font-semibold">Home</span>
                 </a>
+
+                @if(!Auth::guard('admin')->check())
                 <a href="{{ route('submit.report') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-600 hover:bg-gray-50">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
                     <span class="font-semibold">Submit Report</span>
                 </a>
+                @endif
+
                 <a href="{{ route('map.view') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-600 hover:bg-gray-50">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
                     </svg>
                     <span class="font-semibold">Map View</span>
                 </a>
+
+                @if(!Auth::guard('admin')->check())
                 <a href="{{ route('my.reports') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-600 hover:bg-gray-50">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                     </svg>
                     <span class="font-semibold">My Reports</span>
                 </a>
+                @endif
+
                 @if(Auth::guard('admin')->check())
                 <a href="{{ route('admin.dashboard') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3.5 rounded-xl text-gray-600 hover:bg-gray-50">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -489,6 +497,7 @@
                     </div>
 
                     <!-- Quick Actions -->
+                    @if(!Auth::guard('admin')->check())
                     <div class="quick-action-card card-3d p-8">
                         <h2 class="text-xl font-bold text-gray-800 mb-4">Quick Actions</h2>
                         <div class="space-y-3">
@@ -506,6 +515,7 @@
                             </button>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </main>
