@@ -57,8 +57,8 @@ use Illuminate\Http\Request;
 
             $this->userService->register($credentials);
 
-            // TODO: Add redirect to home page
-            return redirect()->to('home');
+
+            return redirect()->route('home');
         }
 
         function adminLogin(Request $request){
@@ -71,7 +71,7 @@ use Illuminate\Http\Request;
             $this->adminService->login($credentials['email'], $credentials['password']);
 
             // TODO: Add redirect to admin page
-            return view('home');
+            return redirect()->route('home');
         }
 
         function adminRegistration(Request $request) {
@@ -84,7 +84,7 @@ use Illuminate\Http\Request;
 
             $this->adminService->register($credentials);
             // TODO: Add redirect to admin page
-            return view('home');
+            return redirect()->route('home');
         }
 
         function userLogout(Request $request) {
