@@ -152,7 +152,13 @@
                 </button>
                 <div class="profile-circle w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm cursor-pointer">
                     {{ 
-                        substr(auth(Auth::guard('admin')->check() ? 'admin' : 'web')->user()->name, 0, 2)
+                        substr(
+                            Auth::guard('admin')->check() 
+                                ? Auth::guard('admin')->user()->email 
+                                : Auth::guard('web')->user()->name, 
+                            0, 
+                            2
+                        )
                     }}
                 </div>
                 <form action="{{ route('user.auth.logout') }}" method="POST">

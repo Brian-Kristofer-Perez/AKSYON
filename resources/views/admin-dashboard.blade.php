@@ -240,7 +240,13 @@
                 </button>
                 <div class="w-11 h-11 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white font-bold text-sm cursor-pointer hover:scale-110 transition-all">
                     {{ 
-                        substr(auth(Auth::guard('admin')->check() ? 'admin' : 'web')->user()->name, 0, 2) 
+                        substr(
+                            Auth::guard('admin')->check() 
+                                ? Auth::guard('admin')->user()->email 
+                                : Auth::guard('web')->user()->name, 
+                            0, 
+                            2
+                        )
                     }}
                 </div>
                 <form method="POST" action="{{ route('admin.auth.logout') }}" class="text-gray-600 hover:text-red-500 transition-all hover:scale-110">

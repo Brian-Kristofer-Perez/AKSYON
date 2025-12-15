@@ -362,7 +362,7 @@
 
         <!-- Main Content -->
         <main class="ml-64 flex-1 p-8">
-            <h1 class="text-4xl font-bold text-white mb-8 drop-shadow-lg">Hi <span id="userName">User</span></h1>
+            <h1 class="text-4xl font-bold text-white mb-8 drop-shadow-lg">Hi, <span id="userName">User</span></h1>
 
             <!-- Statistics Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -513,10 +513,22 @@
 
     <script>
         // Set user name dynamically
-        document.getElementById('userName').textContent = "{{ substr(auth(Auth::guard('admin')->check() ? 'admin' : 'web')->user()->name, 0, 2) }}";
+        document.getElementById('userName').textContent = "{{ 
+            Auth::guard('admin')->check() 
+                ? explode('@',Auth::guard('admin')->user()->email)[0]
+                : Auth::guard('web')->user()->name
+        }}!";
 
         // Set profile initials
-        document.querySelector('.profile-circle').textContent = "{{ substr(auth(Auth::guard('admin')->check() ? 'admin' : 'web')->user()->name, 0, 2) }}";
+        document.querySelector('.profile-circle').textContent = "{{ 
+            substr(
+                Auth::guard('admin')->check() 
+                    ? Auth::guard('admin')->user()->email 
+                    : Auth::guard('web')->user()->name, 
+                0, 
+                2
+            )
+        }}";
 
         // Sample data - replace with actual data from your backend
         const reportsData = [
