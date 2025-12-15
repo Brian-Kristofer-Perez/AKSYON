@@ -18,10 +18,14 @@
             Report::destroy($reportId);
         }
 
-        public function addUpdate(StatusUpdate $update) {
-            Report::find($update->reportId)
-                ->updates()
-                ->save($update);
+        public function addUpdate($array) {
+            
+            $report = Report::find($array['currentReportId']);
+            $report->status = $array['newStatus'];
+            $report->description = $array['notes'];
+            $report->date = now();
+
+            $report->save();
         }
 
         public function getAll() {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StatusUpdate;
 use App\Services\ReportService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,7 +49,6 @@ class ReportController extends Controller
         $fileContents = file_get_contents($file->getRealPath());
         $imageBase64 = base64_encode($fileContents);
 
-        
         // Gonna create a title automatically
         $cleanCategory = Str::headline($validated['category']);
         $dateString = now()->format('Y-m-d');
@@ -68,6 +68,19 @@ class ReportController extends Controller
 
         $this->reportService->addReport($report);
 
-        return redirect()->to('home');
+        return redirect()->route('home');
+    }
+
+    function addUpdate(Request $request) {
+
+        $validated = $request->validate([
+            'currentReportId' => 'required',
+            'newStatus' => 'required',
+            'notes' => 'required',
+        ]);
+
+        $this->reportService->addUpdate($validated);
+
+        return redirect()->route('home');
     }
 }

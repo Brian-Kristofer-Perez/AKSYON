@@ -257,6 +257,7 @@
                             marker.bindPopup(`
                                 <b>${report.title}</b><br>
                                 <span><b> Status: <b> ${report.status} </span> <br> <br>
+                                <b>Latest Update:</b> <br>
                                 <b>${report.description} <br>
                                 <img src=\"data:${report.image_mime};base64,${report.image}\">
                             `);

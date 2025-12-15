@@ -441,18 +441,21 @@
     <div id="updateModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
         <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
             <h3 class="text-2xl font-bold text-gray-800 mb-6">Update Report Status</h3>
-            <form id="updateForm">
+            <form id="updateForm" method="POST" action="{{ route('report.update') }}" >
+                @csrf
+                <input type="hidden" name="currentReportId" id="hiddenReportId">
+
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Status</label>
-                    <select id="newStatus" class="w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none">
-                        <option value="pending">Pending</option>
-                        <option value="ongoing">In Progress</option>
-                        <option value="resolved">Resolved</option>
+                    <select id="newStatus" name="newStatus" class="w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none">
+                        <option value="Pending">Pending</option>
+                        <option value="Ongoing">In Progress</option>
+                        <option value="Resolved">Resolved</option>
                     </select>
                 </div>
                 <div class="mb-6">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Notes</label>
-                    <textarea id="updateNotes" rows="4" class="w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none" placeholder="Add update notes..."></textarea>
+                    <textarea id="updateNotes" name="notes" rows="4" class="w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none" placeholder="Add update notes..."></textarea>
                 </div>
                 <div class="flex justify-end space-x-4">
                     <button type="button" onclick="closeUpdateModal()" class="px-6 py-2 border-2 border-gray-300 rounded-xl hover:bg-gray-50 transition-colors">Cancel</button>
@@ -487,65 +490,18 @@
             }
         }
         
-        // Sample admin reports data
-        const adminReports = [
-            {
-                id: 247,
-                title: "Road Damage",
-                user: "John Doe",
-                location: "40727, -34567",
-                date: "Dec 10, 2025",
-                status: "pending",
-                image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=100&h=100&fit=crop"
-            },
-            {
-                id: 246,
-                title: "Street Light",
-                user: "Jane Smith",
-                location: "41234, -35123",
-                date: "Dec 9, 2025",
-                status: "ongoing",
-                image: "https://images.unsplash.com/photo-1593941707882-a5bac686a2d5?w=100&h=100&fit=crop"
-            },
-            {
-                id: 245,
-                title: "Waste Management",
-                user: "Robert Johnson",
-                location: "41876, -34987",
-                date: "Dec 8, 2025",
-                status: "resolved",
-                image: "https://images.unsplash.com/photo-1605600654924-04d9a119a5bd?w=100&h=100&fit=crop"
-            },
-            {
-                id: 244,
-                title: "Water Leakage",
-                user: "Alice Brown",
-                location: "41567, -34789",
-                date: "Dec 7, 2025",
-                status: "pending",
-                image: "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=100&h=100&fit=crop"
-            },
-            {
-                id: 243,
-                title: "Traffic Signal",
-                user: "Bob Wilson",
-                location: "41345, -35234",
-                date: "Dec 6, 2025",
-                status: "ongoing",
-                image: "https://images.unsplash.com/photo-1584473121925-8c2b1b04acd8?w=100&h=100&fit=crop"
-            }
-        ];
+        const adminReports = @json($reports)
 
         const statusColors = {
-            resolved: 'bg-green-500',
-            ongoing: 'bg-blue-500',
-            pending: 'bg-amber-500'
+            Resolved: 'bg-green-500',
+            Ongoing: 'bg-blue-500',
+            Pending: 'bg-amber-500'
         };
 
         const statusLabels = {
-            resolved: 'Resolved',
-            ongoing: 'In Progress',
-            pending: 'Pending'
+            Resolved: 'Resolved',
+            Ongoing: 'In Progress',
+            Pending: 'Pending'
         };
 
         function renderAdminReports(reports) {
@@ -586,17 +542,17 @@
                                     <tr class="hover:bg-gray-50 cursor-pointer transition-colors">
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
-                                                <img src="${report.image}" alt="${report.title}" class="w-10 h-10 rounded-lg object-cover mr-3">
+                                                <img src="data:${report.image_mime};base64,${report.image}" alt="${report.title}" class="w-10 h-10 rounded-lg object-cover mr-3">
                                                 <div class="text-sm font-medium text-gray-900">#${report.id} - ${report.title}</div>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.user}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.location}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.date}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">lat: ${report.latitude}, lon: ${report.longitude}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.date.split('T')[0]}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                                                report.status === 'resolved' ? 'bg-green-100 text-green-700' :
-                                                report.status === 'ongoing' ? 'bg-cyan-100 text-cyan-700' :
+                                                report.status === 'Resolved' ? 'bg-green-100 text-green-700' :
+                                                report.status === 'Ongoing' ? 'bg-cyan-100 text-cyan-700' :
                                                 'bg-amber-100 text-amber-700'
                                             }">${statusLabels[report.status]}</span>
                                         </td>
@@ -616,20 +572,20 @@
                     <div class="grid grid-cols-3 gap-6">
                         ${reports.map(report => `
                             <div class="report-card overflow-hidden">
-                                <img src="${report.image}" alt="${report.title}" class="w-full h-48 object-cover">
+                                <img src="data:${report.image_mime};base64,${report.image}" alt="${report.title}" class="w-full h-48 object-cover">
                                 <div class="p-6">
                                     <div class="flex items-center justify-between mb-4">
                                         <span class="text-lg font-bold text-blue-600">#${report.id} - ${report.title}</span>
                                         <span class="px-3 py-1 ${
-                                            report.status === 'resolved' ? 'bg-green-100 text-green-700' :
-                                            report.status === 'ongoing' ? 'bg-cyan-100 text-cyan-700' :
+                                            report.status === 'Resolved' ? 'bg-green-100 text-green-700' :
+                                            report.status === 'Ongoing' ? 'bg-cyan-100 text-cyan-700' :
                                             'bg-amber-100 text-amber-700'
                                         } text-sm font-semibold rounded-full">${statusLabels[report.status]}</span>
                                     </div>
                                     <div class="space-y-2 text-sm text-gray-600 mb-4">
                                         <p><strong>User:</strong> ${report.user}</p>
-                                        <p><strong>Location:</strong> ${report.location}</p>
-                                        <p><strong>Date:</strong> ${report.date}</p>
+                                        <p><strong>Location:</strong> lat: ${report.latitude}, lon: ${report.longitude} </p>
+                                        <p><strong>Date:</strong> ${report.date.split('T')[0]}</p>
                                     </div>
                                     <div class="flex justify-between">
                                         <button onclick="openUpdateModal(${report.id})" class="text-blue-600 hover:text-blue-900 font-medium">Update Status</button>
@@ -644,9 +600,10 @@
         }
 
         function openUpdateModal(reportId) {
-            currentReportId = reportId;
+
+            document.getElementById('hiddenReportId').value = reportId;
             document.getElementById('updateModal').classList.remove('hidden');
-            // Find the current report and set the current status
+
             const report = adminReports.find(r => r.id === reportId);
             if (report) {
                 document.getElementById('newStatus').value = report.status;
@@ -669,22 +626,6 @@
                 }
             }
         }
-
-        // Handle update form submission
-        document.getElementById('updateForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const newStatus = document.getElementById('newStatus').value;
-            const notes = document.getElementById('updateNotes').value;
-            
-            // Find and update the report
-            const report = adminReports.find(r => r.id === currentReportId);
-            if (report) {
-                report.status = newStatus;
-                renderAdminReports(adminReports);
-                closeUpdateModal();
-            }
-        });
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {

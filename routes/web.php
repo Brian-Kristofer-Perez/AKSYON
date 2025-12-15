@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ReportController;
 use App\Services\ReportService;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;
@@ -52,38 +53,17 @@ Route::get('/submit-report', [ReportController::class, 'submitReportsPage'])->na
 Route::post('/reports', [ReportController::class, 'submitReport'])->middleware('auth:web')->name('submit.report.post');
 
 Route::get('/admin/dashboard', function () {
-    return view('admin-dashboard');
+
+    $service = new ReportService();
+    $reports = $service->getAll();
+
+    return view('admin-dashboard', ['reports' => $reports]);
 })->middleware('auth:admin')->name('admin.dashboard');
 
 
-// Route::get('/admin-dashboard', function () {
-//     return view('admin-dashboard');
-// });
-
-// Route::get('/home', function () {
-//     return view('home');
-// });
-
-// Route::get('/landing', function () {
-//     return view('landing');
-// });
-
-// Route::get('/map', function () {
-//     return view('map');
-// });
-
-// Route::get('/my-reports', function () {
-//     return view('my-reports');
-// });
-
-// Route::get('/submit-report', function () {
-//     return view('submit-report');
-// });
-
-// Route::get('/welcome', function () {
-//     return view('welcome');
-// });
-
+Route::post('/reports/update', [ReportController::class, 'addUpdate'])
+    ->middleware('auth:admin')
+    ->name('report.update');
 
 
 
