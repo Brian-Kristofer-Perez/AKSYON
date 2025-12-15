@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
         
         // Page routes for login
         function userLoginPage(){
-            return view('auth.login');
+            return view('auth.login'); 
         }
 
         function userRegistrationPage() {
@@ -26,13 +26,12 @@ use Illuminate\Http\Request;
         }
 
         function adminLoginPage(){
-            return view('admin.login');
+            return view('admin.auth.login');
         }
 
         function adminRegistrationPage() {
-            return view('admin.register');
+            return view('admin.auth.register');
         }
-
         
         // POST routes for login
         function userLogin(Request $request){
@@ -58,34 +57,44 @@ use Illuminate\Http\Request;
 
             $this->userService->register($credentials);
 
-            // TODO: Add redirect to home page
-            return redirect()->to('home');
+
+            return redirect()->route('home');
         }
 
         function adminLogin(Request $request){
 
             $credentials = $request->validate([
                 'email' => ['required', 'email'],
-                'password' => ['required', 'password'] 
+                'password' => ['required', 'string'] 
             ]);
 
             $this->adminService->login($credentials['email'], $credentials['password']);
 
             // TODO: Add redirect to admin page
-            return redirect()->to('home');
+            return redirect()->route('home');
         }
 
-        function adminRegistration($request) {
+        function adminRegistration(Request $request) {
 
             $credentials = $request->validate([
                 'name' => ['required', 'string'],
                 'email' => ['required', 'email'],
-                'password' => ['required', 'password'] 
+                'password' => ['required', 'string'] 
             ]);
 
-            $this->adminService->register($request->data);
+            $this->adminService->register($credentials);
             // TODO: Add redirect to admin page
-            return redirect()->to('home');
+            return redirect()->route('home');
+        }
+
+        function userLogout(Request $request) {
+            $this->userService->logout();
+            return view('landing');
+        }
+
+        function adminLogout(Request $request) {
+            $this->adminService->logout();
+            return view('landing');
         }
 
     }

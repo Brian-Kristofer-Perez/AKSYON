@@ -11,6 +11,7 @@ class Admin extends Authenticatable
     protected $fillable = [
         'id',
         'email',
+        'password',
         'profile_image',
         'profile_image_mime',
         'specimen_signature',
@@ -18,7 +19,6 @@ class Admin extends Authenticatable
     ];
 
     protected $hidden = [
-        'password'
     ];
 
     protected function casts(): array
@@ -26,11 +26,7 @@ class Admin extends Authenticatable
         return [
             'id' => 'int',
             'email' => 'string',
-            'card_id' => 'string',
             'password' => 'hashed',
-            'profile_image' => 'string',
-            'profile_image_mime' => 'string',
-            'specimen_signature' => 'string'
         ];
     }
 }

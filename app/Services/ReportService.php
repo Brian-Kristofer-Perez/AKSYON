@@ -10,14 +10,22 @@
             $report->save();
         }
 
+        public function getById($id) {
+            return Report::where('userId', $id)->get();
+        }
+
         public function deleteReport(int $reportId) {
             Report::destroy($reportId);
         }
 
-        public function addUpdate(StatusUpdate $update) {
-            Report::find($update->reportId)
-                ->updates()
-                ->save($update);
+        public function addUpdate($array) {
+            
+            $report = Report::find($array['currentReportId']);
+            $report->status = $array['newStatus'];
+            $report->description = $array['notes'];
+            $report->date = now();
+
+            $report->save();
         }
 
         public function getAll() {
