@@ -246,6 +246,24 @@
                         maxZoom: 19,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                     }).addTo(map);
+
+                    const reports = @json($mapMarkers);
+                    
+                    reports.forEach(report => {
+                        if (report.latitude && report.longitude) {
+
+                            let marker = L.marker([report.latitude, report.longitude]).addTo(map);
+
+                            marker.bindPopup(`
+                                <b>${report.title}</b><br>
+                                <span><b> Status: <b> ${report.status} </span> <br> <br>
+                                <b>${report.description} <br>
+                                <img src=\"data:${report.image_mime};base64,${report.image}\">
+                            `);
+                        }
+                    });
+
+
                 </script>
 
                 <!-- Legend -->

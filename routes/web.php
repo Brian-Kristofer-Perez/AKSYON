@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ReportController;
+use App\Services\ReportService;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;
@@ -33,7 +34,11 @@ Route::post('/admin/logout', [AuthController::class, 'adminLogout'])->name('admi
 Route::post('/user/logout', [AuthController::class, 'userLogout'])->name('user.auth.logout');
 
 Route::get('/map', function () {
-    return view('map');
+
+    $service = new ReportService();
+    $reports = $service->getAll();
+    return view('map', ['mapMarkers' => $reports]);
+
 })->middleware('auth:web,admin')->name('map.view');
 
 Route::get('/my-reports', [ReportController::class, 'myReports'])->name('my.reports')->middleware('auth:web');
