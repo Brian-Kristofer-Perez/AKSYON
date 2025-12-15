@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+
+    <!-- Leaflet markers -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
@@ -241,6 +247,35 @@
                 <script>
                     let map = L.map('map').setView([14.5995, 120.9842], 13)
 
+                    const commonAwesomeStyle = {
+                        prefix: 'fa',           
+                        iconColor: 'white',     
+                        spin: false,
+                        icon: ''
+                    };
+
+                    var iconPending = L.AwesomeMarkers.icon({
+                        ...commonAwesomeStyle,
+                        markerColor: 'orange'   
+                    });
+
+                    var iconInProgress = L.AwesomeMarkers.icon({
+                        ...commonAwesomeStyle,
+                        spin: true,             
+                        markerColor: 'blue'     
+                    });
+
+                    var iconResolved = L.AwesomeMarkers.icon({
+                        ...commonAwesomeStyle,
+                        markerColor: 'green'    
+                    });
+
+                    const statusMap = {
+                        "Pending": iconPending,
+                        "Ongoing": iconInProgress,
+                        "Resolved": iconResolved
+                    }
+
                     // OpenStreetMaps source image :))
                     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
@@ -252,7 +287,10 @@
                     reports.forEach(report => {
                         if (report.latitude && report.longitude) {
 
-                            let marker = L.marker([report.latitude, report.longitude]).addTo(map);
+                            let marker = L.marker(
+                                [report.latitude, report.longitude],
+                                { icon: statusMap[report.status]}
+                            ).addTo(map);
 
                             marker.bindPopup(`
                                 <b>${report.title}</b><br>
